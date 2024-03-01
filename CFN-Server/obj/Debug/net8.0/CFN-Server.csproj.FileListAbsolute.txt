@@ -97,3 +97,9 @@ C:\Users\Basil\source\repos\Cadet Feedback Hub\CFN-Server\obj\Debug\net8.0\refin
 C:\Users\Basil\source\repos\Cadet Feedback Hub\CFN-Server\obj\Debug\net8.0\CFN-Server.pdb
 C:\Users\Basil\source\repos\Cadet Feedback Hub\CFN-Server\obj\Debug\net8.0\CFN-Server.genruntimeconfig.cache
 C:\Users\Basil\source\repos\Cadet Feedback Hub\CFN-Server\obj\Debug\net8.0\ref\CFN-Server.dll
+C:\Users\Basil\source\repos\Cadet Feedback Hub\CFN-Server\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\Basil\source\repos\Cadet Feedback Hub\CFN-Server\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Basil\source\repos\Cadet Feedback Hub\CFN-Server\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Basil\source\repos\Cadet Feedback Hub\CFN-Server\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Basil\source\repos\Cadet Feedback Hub\CFN-Server\obj\Debug\net8.0\CFN-Server.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Basil\source\repos\Cadet Feedback Hub\CFN-Server\obj\Debug\net8.0\CFN-Server.sourcelink.json

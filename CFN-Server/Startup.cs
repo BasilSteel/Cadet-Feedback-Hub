@@ -6,6 +6,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using CFN_Server.Data;
 using CFN_Server.Services;
+using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.OpenApi.Models;
 
 namespace CFN_Server
 {
@@ -31,14 +33,21 @@ namespace CFN_Server
             services.AddScoped<IFeedbackService, FeedbackService>();
             services.AddScoped<IQAService, QAService>();
             services.AddScoped<IDiscussionService, DiscussionService>();
-        }
 
+            // Добавление Swagger
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "CFN Server API", Version = "v1" });
+            });
+        }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CFN Server API v1"));
             }
             else
             {
@@ -54,12 +63,12 @@ namespace CFN_Server
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}");
-    endpoints.MapControllers();
-});
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllers();
+            });
         }
     }
 }
