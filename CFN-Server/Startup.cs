@@ -24,6 +24,14 @@ namespace CFN_Server
         {
             services.AddControllersWithViews();
 
+            services.AddControllers()
+                .AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                });
+
+
+
             // Подключение к базе данных PostgreSQL
             services.AddDbContext<DbContextCFN>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"))

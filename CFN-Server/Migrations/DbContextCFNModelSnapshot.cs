@@ -39,8 +39,6 @@ namespace CFN_Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DiscussionId");
-
                     b.ToTable("Comments");
                 });
 
@@ -97,21 +95,6 @@ namespace CFN_Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Questions");
-                });
-
-            modelBuilder.Entity("CFN_Server.Models.Comment", b =>
-                {
-                    b.HasOne("CFN_Server.Models.Discussion", "Discussion")
-                        .WithMany("Comments")
-                        .HasForeignKey("DiscussionId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.Navigation("Discussion");
-                });
-
-            modelBuilder.Entity("CFN_Server.Models.Discussion", b =>
-                {
-                    b.Navigation("Comments");
                 });
 #pragma warning restore 612, 618
         }

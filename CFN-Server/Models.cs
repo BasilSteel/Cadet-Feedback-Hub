@@ -29,7 +29,7 @@ namespace CFN_Server.Models
 
         public string Title { get; set; }
 
-        public ICollection<Comment>? Comments { get; set; }
+        // public ICollection<Comment>? Comments { get; set; }
     }
 
     public class Comment
@@ -39,9 +39,9 @@ namespace CFN_Server.Models
 
         public string Text { get; set; }
 
-        [ForeignKey("Discussion")]
+        // [ForeignKey("Discussion")]
         public int? DiscussionId { get; set; }
 
-        public Discussion? Discussion { get; set; }
+        // public Discussion? Discussion { get; set; }
     }
 }

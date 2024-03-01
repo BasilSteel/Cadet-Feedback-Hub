@@ -16,11 +16,11 @@ namespace CFN_Server.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Comment>()
-                .HasOne(c => c.Discussion)
-                .WithMany(d => d.Comments)
-                .HasForeignKey(c => c.DiscussionId)
-                .OnDelete(DeleteBehavior.Cascade);
+            // modelBuilder.Entity<Comment>()
+            //     .HasOne(c => c.Discussion)
+            //     .WithMany(d => d.Comments)
+            //     .HasForeignKey(c => c.DiscussionId)
+            //     .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Basil\\source\\repos\\Cadet Feedback Hub\\CFN-Server\\CFN-Server.csproj": {}
+    "c:\\Users\\Basil\\source\\repos\\Cadet Feedback Hub\\CFN-Server\\CFN-Server.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Basil\\source\\repos\\Cadet Feedback Hub\\CFN-Server\\CFN-Server.csproj": {
+    "c:\\Users\\Basil\\source\\repos\\Cadet Feedback Hub\\CFN-Server\\CFN-Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Basil\\source\\repos\\Cadet Feedback Hub\\CFN-Server\\CFN-Server.csproj",
+        "projectUniqueName": "c:\\Users\\Basil\\source\\repos\\Cadet Feedback Hub\\CFN-Server\\CFN-Server.csproj",
         "projectName": "CFN-Server",
-        "projectPath": "C:\\Users\\Basil\\source\\repos\\Cadet Feedback Hub\\CFN-Server\\CFN-Server.csproj",
+        "projectPath": "c:\\Users\\Basil\\source\\repos\\Cadet Feedback Hub\\CFN-Server\\CFN-Server.csproj",
         "packagesPath": "C:\\Users\\Basil\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Basil\\source\\repos\\Cadet Feedback Hub\\CFN-Server\\obj\\",
+        "outputPath": "c:\\Users\\Basil\\source\\repos\\Cadet Feedback Hub\\CFN-Server\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -45,6 +45,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.2, )"
