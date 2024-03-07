@@ -1,6 +1,7 @@
 import QAAdminComponents from "../Components/QAAdminComponents";
 import FeedbackAdminComponents from "../Components/FeedbackAdminComponents";
 import DiscussionAdminComponents from "../Components/DiscussionAdminComponents";
+import SuggestionsAdminCoponents from "../Components/SuggestionsAdminCoponents";
 const AdminPanel = () => {
   return (
     <div className="bg-gray-100 min-h-screen">
@@ -10,6 +11,7 @@ const AdminPanel = () => {
           <DiscussionAdminComponents />
           <QAAdminComponents />
           <FeedbackAdminComponents />
+          <SuggestionsAdminCoponents />
         </div>
       </div>
     </div>

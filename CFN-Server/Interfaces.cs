@@ -30,4 +30,12 @@ namespace CFN_Server.Services
         void UpdateDiscussion(int id, Discussion discussion);
         void DeleteDiscussion(int id);
     }
+    public interface ISuggestionService
+    {
+        IEnumerable<Suggestion> GetAllSuggestions();
+        Suggestion GetSuggestionById(int id);
+        Suggestion CreateSuggestion(Suggestion suggestion);
+        void UpdateSuggestion(int id, Suggestion suggestion);
+        void DeleteSuggestion(int id);
+    }
 }

@@ -50,4 +50,11 @@ namespace CFN_Server.Models
 
         // public Discussion? Discussion { get; set; }
     }
+    public class Suggestion
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+    }
+
 }
+

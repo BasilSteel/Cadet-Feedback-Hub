@@ -39,6 +39,8 @@ namespace CFN_Server
             services.AddScoped<IFeedbackService, FeedbackService>();
             services.AddScoped<IQAService, QAService>();
             services.AddScoped<IDiscussionService, DiscussionService>();
+            services.AddScoped<ISuggestionService, SuggestionService>();
+
 
             // Добавление CORS
             services.AddCors(options =>

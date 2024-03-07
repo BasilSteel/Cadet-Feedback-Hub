@@ -1,6 +1,7 @@
 ﻿using CFN_Server.Models;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace CFN_Server.Data
 {
     public class DbContextCFN : DbContext
@@ -13,6 +14,7 @@ namespace CFN_Server.Data
         public DbSet<Question> Questions { get; set; }
         public DbSet<Discussion> Discussions { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Suggestion> Suggestion { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
