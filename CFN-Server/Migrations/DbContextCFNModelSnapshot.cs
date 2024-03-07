@@ -85,7 +85,6 @@ namespace CFN_Server.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("AnswerText")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("QuestionText")

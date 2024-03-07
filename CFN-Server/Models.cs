@@ -19,8 +19,14 @@ namespace CFN_Server.Models
 
         public string QuestionText { get; set; }
 
-        public string AnswerText { get; set; }
+        public string? AnswerText { get; set; }
+
+        public Question()
+        {
+            AnswerText = null;
+        }
     }
+
 
     public class Discussion
     {

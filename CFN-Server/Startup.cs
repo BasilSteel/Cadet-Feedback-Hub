@@ -30,8 +30,6 @@ namespace CFN_Server
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 });
 
-
-
             // Подключение к базе данных PostgreSQL
             services.AddDbContext<DbContextCFN>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"))
@@ -41,6 +39,15 @@ namespace CFN_Server
             services.AddScoped<IFeedbackService, FeedbackService>();
             services.AddScoped<IQAService, QAService>();
             services.AddScoped<IDiscussionService, DiscussionService>();
+
+            // Добавление CORS
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowLocalhost",
+                    builder => builder.WithOrigins("http://localhost:5173")
+                                      .AllowAnyHeader()
+                                      .AllowAnyMethod());
+            });
 
             // Добавление Swagger
             services.AddSwaggerGen(c =>
@@ -68,6 +75,8 @@ namespace CFN_Server
 
             app.UseRouting();
 
+            app.UseCors("AllowLocalhost"); // Добавление CORS
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -78,5 +87,6 @@ namespace CFN_Server
                 endpoints.MapControllers();
             });
         }
+
     }
 }

@@ -25,7 +25,7 @@ const Suggestions = () => {
     <div className="bg-gray-100 min-h-screen">
       <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <div className="px-4 py-6 sm:px-0">
-          <h1 className="text-2xl font-semibold text-gray-900">Suggestions</h1>
+          <h1 className="text-2xl font-semibold text-gray-900">Предложения</h1>
           {/* Форма для добавления нового предложения */}
           <div className="mt-6">
             <div className="bg-white shadow sm:rounded-lg p-4">

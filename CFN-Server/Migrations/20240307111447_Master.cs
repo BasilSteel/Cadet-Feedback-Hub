@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CFN_Server.Migrations
 {
     /// <inheritdoc />
-    public partial class Main : Migration
+    public partial class Master : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -58,7 +58,7 @@ namespace CFN_Server.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     QuestionText = table.Column<string>(type: "text", nullable: false),
-                    AnswerText = table.Column<string>(type: "text", nullable: false)
+                    AnswerText = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {

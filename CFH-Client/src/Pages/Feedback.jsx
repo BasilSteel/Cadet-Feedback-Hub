@@ -7,16 +7,35 @@ const Feedback = () => {
   // Обработчик отправки обратной связи
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Здесь можно добавить логику отправки обратной связи на сервер или другие действия
-    alert("Обратная связь отправлена: " + feedback);
-    setFeedback("");
+    // Отправка обратной связи на сервер
+    fetch("http://localhost:5136/api/Feedback", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ message: feedback }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert("Обратная связь успешно отправлена");
+          setFeedback("");
+        } else {
+          throw new Error("Failed to send feedback");
+        }
+      })
+      .catch((error) => {
+        console.error("Error sending feedback:", error);
+        alert("Ошибка отправки обратной связи");
+      });
   };
 
   return (
     <div className="bg-gray-100 min-h-screen">
       <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <div className="px-4 py-6 sm:px-0">
-          <h1 className="text-2xl font-semibold text-gray-900">Feedback</h1>
+          <h1 className="text-2xl font-semibold text-gray-900">
+            Обратная связь
+          </h1>
           {/* Форма для отправки обратной связи */}
           <div className="mt-6">
             <form

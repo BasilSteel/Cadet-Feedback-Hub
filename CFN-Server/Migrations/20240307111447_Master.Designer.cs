@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CFN_Server.Migrations
 {
     [DbContext(typeof(DbContextCFN))]
-    [Migration("20240301145333_Main")]
-    partial class Main
+    [Migration("20240307111447_Master")]
+    partial class Master
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -88,7 +88,6 @@ namespace CFN_Server.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("AnswerText")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("QuestionText")

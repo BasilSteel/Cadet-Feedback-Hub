@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CFN-Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5111a8dc578a114a1751407e577f7ca3b2ffb7db")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+57bee84087e6b38582c92efc9385cde09e73fc0a")]
 [assembly: System.Reflection.AssemblyProductAttribute("CFN-Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CFN-Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

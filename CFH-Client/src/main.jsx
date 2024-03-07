@@ -9,6 +9,7 @@ import Discussions from "./Pages/Discussions";
 import QandA from "./Pages/QandA";
 import Feedback from "./Pages/Feedback";
 import AdminPanel from "./Pages/AdminPanel";
+import Discussion from "./Pages/Discussion"; // Новая страница для обсуждения
 
 const App = () => (
   <Router>
@@ -20,6 +21,8 @@ const App = () => (
       <Route path="/Discussions" element={<Discussions />} />
       <Route path="/Feedback" element={<Feedback />} />
       <Route path="/admin" element={<AdminPanel />} />
+      <Route path="/discussion/:id" element={<Discussion />} />{" "}
+      {/* Новый маршрут */}
     </Routes>
   </Router>
 );
