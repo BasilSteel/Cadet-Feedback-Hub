@@ -11,9 +11,6 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="flex space-x-4">
-            <Link to="/" className="text-white hover:text-gray-300">
-              Дашборд
-            </Link>
             <Link to="/suggestions" className="text-white hover:text-gray-300">
               Предложения
             </Link>
@@ -25,9 +22,6 @@ const Navbar = () => {
             </Link>
             <Link to="/feedback" className="text-white hover:text-gray-300">
               Обратная связь
-            </Link>
-            <Link to="/admin" className="text-white hover:text-gray-300">
-              Admin Panel
             </Link>
           </div>
         </div>

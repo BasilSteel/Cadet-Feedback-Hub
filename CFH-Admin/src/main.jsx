@@ -3,23 +3,20 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./index.css";
 import Navbar from "./Components/Navbar";
-import Suggestions from "./Pages/Suggestions";
-import Discussions from "./Pages/Discussions";
-import QandA from "./Pages/QandA";
-import Feedback from "./Pages/Feedback";
 import Discussion from "./Pages/Discussion";
+import Feedback from "./Pages/Feedback";
+import QA from "./Pages/QA";
+import Suggestions from "./Pages/Suggestions";
 
 const App = () => (
   <Router>
     <Navbar />
     <Routes>
-      <Route path="/" element={<QandA />} />
-      <Route path="/Suggestions" element={<Suggestions />} />
-      <Route path="/Qanda" element={<QandA />} />
-      <Route path="/Discussions" element={<Discussions />} />
+      <Route path="/" element={<Discussion />} />
+      <Route path="/Discussion" element={<Discussion />} />
       <Route path="/Feedback" element={<Feedback />} />
-      <Route path="/discussion/:id" element={<Discussion />} />{" "}
-      {/* Новый маршрут */}
+      <Route path="/QandA" element={<QA />} />
+      <Route path="/Suggestions" element={<Suggestions />} />
     </Routes>
   </Router>
 );
