@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function Discussion() {
+const Discussion = () => {
   const [discussionList, setDiscussionList] = useState([]);
   const [newDiscussionTitle, setNewDiscussionTitle] = useState("");
 
@@ -92,4 +92,6 @@ export default function Discussion() {
       </div>
     </div>
   );
-}
+};
+
+export default Discussion;

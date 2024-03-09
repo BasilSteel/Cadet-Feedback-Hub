@@ -19,7 +19,6 @@ const App = () => (
       <Route path="/Discussions" element={<Discussions />} />
       <Route path="/Feedback" element={<Feedback />} />
       <Route path="/discussion/:id" element={<Discussion />} />{" "}
-      {/* Новый маршрут */}
     </Routes>
   </Router>
 );

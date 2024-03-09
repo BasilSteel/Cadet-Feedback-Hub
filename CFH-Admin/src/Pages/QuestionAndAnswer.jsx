@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function QA() {
+const QuestionAndAnswer = () => {
   const [qaList, setQAList] = useState([]);
 
   useEffect(() => {
@@ -28,10 +28,11 @@ export default function QA() {
     })
       .then((response) => {
         if (response.ok) {
-          const updatedQAList = qaList.map((qa) =>
-            qa.id === questionId ? updatedQuestion : qa
+          setQAList((prevQAList) =>
+            prevQAList.map((qa) =>
+              qa.id === questionId ? updatedQuestion : qa
+            )
           );
-          setQAList(updatedQAList);
         } else {
           console.error("Failed to add answer:", response.statusText);
         }
@@ -60,17 +61,15 @@ export default function QA() {
         <div className="px-4 py-6 sm:px-0">
           <div className="mt-6">
             <h2 className="text-lg font-semibold">Q&A</h2>
-
             <ul className="bg-white shadow sm:rounded-lg">
               {qaList.map((qa) => (
                 <li key={qa.id} className="border-b border-gray-200 p-4">
                   <h2 className="text-lg font-semibold">{qa.questionText}</h2>
-                  {/* <p className="text-gray-700">{qa.answerText}</p> */}
                   <input
                     type="text"
                     className="mt-2 w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     placeholder="Введите ответ"
-                    value={qa.answerText}
+                    value={qa.answerText || ""}
                     onChange={(e) => handleAddAnswer(qa.id, e.target.value)}
                   />
                   <button
@@ -93,4 +92,6 @@ export default function QA() {
       </div>
     </div>
   );
-}
+};
+
+export default QuestionAndAnswer;

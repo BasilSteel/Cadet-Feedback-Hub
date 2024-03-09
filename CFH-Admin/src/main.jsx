@@ -5,7 +5,7 @@ import "./index.css";
 import Navbar from "./Components/Navbar";
 import Discussion from "./Pages/Discussion";
 import Feedback from "./Pages/Feedback";
-import QA from "./Pages/QA";
+import QuestionAndAnswer from "./Pages/QuestionAndAnswer";
 import Suggestions from "./Pages/Suggestions";
 
 const App = () => (
@@ -15,7 +15,7 @@ const App = () => (
       <Route path="/" element={<Discussion />} />
       <Route path="/Discussion" element={<Discussion />} />
       <Route path="/Feedback" element={<Feedback />} />
-      <Route path="/QandA" element={<QA />} />
+      <Route path="/QandA" element={<QuestionAndAnswer />} />
       <Route path="/Suggestions" element={<Suggestions />} />
     </Routes>
   </Router>

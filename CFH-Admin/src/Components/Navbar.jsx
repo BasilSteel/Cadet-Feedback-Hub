@@ -17,7 +17,10 @@ const Navbar = () => {
             <Link to="/Feedback" className="text-white hover:text-gray-300">
               Обратная связь
             </Link>
-            <Link to="/QA" className="text-white hover:text-gray-300">
+            <Link
+              to="/QuestionAndAnswer"
+              className="text-white hover:text-gray-300"
+            >
               Вопрос ответ
             </Link>
             <Link to="/Suggestions" className="text-white hover:text-gray-300">

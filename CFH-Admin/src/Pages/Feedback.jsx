@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function Feedback() {
+const Feedback = () => {
   const [feedbackList, setFeedbackList] = useState([]);
 
   useEffect(() => {
@@ -28,4 +28,6 @@ export default function Feedback() {
       </div>
     </div>
   );
-}
+};
+
+export default Feedback;
