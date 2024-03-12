@@ -1,9 +1,9 @@
-﻿using CFN_Server.Models;
-using CFN_Server.Services;
+﻿using CFN_ServerAdmin.Models;
+using CFN_ServerAdmin.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CFN_Server
+namespace CFN_ServerAdmin
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -40,7 +40,23 @@ namespace CFN_Server
             return CreatedAtAction(nameof(GetSuggestion), new { id = newSuggestion.Id }, newSuggestion);
         }
 
+        [HttpPut("{id}")]
+        public IActionResult UpdateSuggestion(int id, Suggestion suggestion)
+        {
+            if (id != suggestion.Id)
+            {
+                return BadRequest();
+            }
+            _suggestionService.UpdateSuggestion(id, suggestion);
+            return NoContent();
+        }
 
+        [HttpDelete("{id}")]
+        public IActionResult DeleteSuggestion(int id)
+        {
+            _suggestionService.DeleteSuggestion(id);
+            return NoContent();
+        }
     }
 
 }

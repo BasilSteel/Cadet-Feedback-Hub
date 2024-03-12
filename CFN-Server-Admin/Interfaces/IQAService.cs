@@ -1,12 +1,13 @@
-using CFN_Server.Models;
+using CFN_ServerAdmin.Models;
 
-namespace CFN_Server.Services
+namespace CFN_ServerAdmin.Services
 {
     public interface IQAService
     {
         IEnumerable<Question> GetAllQuestions();
         Question GetQuestionById(int id);
         Question CreateQuestion(Question question);
-
+        void UpdateQuestion(int id, Question question);
+        void DeleteQuestion(int id);
     }
 }

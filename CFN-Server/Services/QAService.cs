@@ -30,26 +30,6 @@ namespace CFN_Server.Services
             return question;
         }
 
-        public void UpdateQuestion(int id, Question question)
-        {
-            var existingQuestion = _context.Questions.FirstOrDefault(q => q.Id == id);
-            if (existingQuestion != null)
-            {
-                existingQuestion.QuestionText = question.QuestionText;
-                existingQuestion.AnswerText = question.AnswerText;
-                _context.SaveChanges();
-            }
-        }
-
-        public void DeleteQuestion(int id)
-        {
-            var question = _context.Questions.FirstOrDefault(q => q.Id == id);
-            if (question != null)
-            {
-                _context.Questions.Remove(question);
-                _context.SaveChanges();
-            }
-        }
 
     }
 }

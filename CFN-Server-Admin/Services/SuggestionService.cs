@@ -1,8 +1,8 @@
-using CFN_Server.Models;
-using CFN_Server.Data;
+using CFN_ServerAdmin.Models;
+using CFN_ServerAdmin.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace CFN_Server.Services
+namespace CFN_ServerAdmin.Services
 {
     public class SuggestionService : ISuggestionService
     {
@@ -30,7 +30,18 @@ namespace CFN_Server.Services
             return suggestion;
         }
 
+        public void UpdateSuggestion(int id, Suggestion suggestion)
+        {
+            _context.Entry(suggestion).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
 
+        public void DeleteSuggestion(int id)
+        {
+            var suggestion = _context.Suggestion.Find(id);
+            _context.Suggestion.Remove(suggestion);
+            _context.SaveChanges();
+        }
     }
 }
 

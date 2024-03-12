@@ -12,16 +12,6 @@ namespace CFN_Server.Services
             _context = context;
         }
 
-        public IEnumerable<Feedback> GetAllFeedback()
-        {
-            return _context.Feedback.ToList();
-        }
-
-        public Feedback GetFeedbackById(int id)
-        {
-            return _context.Feedback.FirstOrDefault(f => f.Id == id);
-        }
-
         public Feedback CreateFeedback(Feedback feedback)
         {
             _context.Feedback.Add(feedback);
@@ -29,24 +19,6 @@ namespace CFN_Server.Services
             return feedback;
         }
 
-        public void UpdateFeedback(int id, Feedback feedback)
-        {
-            var existingFeedback = _context.Feedback.FirstOrDefault(f => f.Id == id);
-            if (existingFeedback != null)
-            {
-                existingFeedback.Message = feedback.Message;
-                _context.SaveChanges();
-            }
-        }
 
-        public void DeleteFeedback(int id)
-        {
-            var feedback = _context.Feedback.FirstOrDefault(f => f.Id == id);
-            if (feedback != null)
-            {
-                _context.Feedback.Remove(feedback);
-                _context.SaveChanges();
-            }
-        }
     }
 }

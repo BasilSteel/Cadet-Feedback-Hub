@@ -22,32 +22,5 @@ namespace CFN_Server.Services
             return _context.Discussions.FirstOrDefault(d => d.Id == id);
         }
 
-        public Discussion CreateDiscussion(Discussion discussion)
-        {
-            _context.Discussions.Add(discussion);
-            _context.SaveChanges();
-            return discussion;
-        }
-
-        public void UpdateDiscussion(int id, Discussion discussion)
-        {
-            var existingDiscussion = _context.Discussions.FirstOrDefault(d => d.Id == id);
-            if (existingDiscussion != null)
-            {
-                existingDiscussion.Title = discussion.Title;
-                // Предположим, что обновление комментариев не поддерживается в данной реализации
-                _context.SaveChanges();
-            }
-        }
-
-        public void DeleteDiscussion(int id)
-        {
-            var discussion = _context.Discussions.FirstOrDefault(d => d.Id == id);
-            if (discussion != null)
-            {
-                _context.Discussions.Remove(discussion);
-                _context.SaveChanges();
-            }
-        }
     }
 }

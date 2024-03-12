@@ -24,18 +24,6 @@ namespace CFN_Server.Controllers
             return _context.Feedback.ToList();
         }
 
-        [HttpGet("{id}")]
-        public ActionResult<Feedback> GetFeedback(int id)
-        {
-            var feedback = _context.Feedback.Find(id);
-
-            if (feedback == null)
-            {
-                return NotFound();
-            }
-
-            return feedback;
-        }
 
         [HttpPost]
         public ActionResult<Feedback> PostFeedback(Feedback feedback)
@@ -46,34 +34,5 @@ namespace CFN_Server.Controllers
             return CreatedAtAction(nameof(GetFeedback), new { id = feedback.Id }, feedback);
         }
 
-        [HttpPut("{id}")]
-        public IActionResult PutFeedback(int id, Feedback feedback)
-        {
-            if (id != feedback.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(feedback).State = EntityState.Modified;
-            _context.SaveChanges();
-
-            return NoContent();
-        }
-
-        [HttpDelete("{id}")]
-        public IActionResult DeleteFeedback(int id)
-        {
-            var feedback = _context.Feedback.Find(id);
-
-            if (feedback == null)
-            {
-                return NotFound();
-            }
-
-            _context.Feedback.Remove(feedback);
-            _context.SaveChanges();
-
-            return NoContent();
-        }
     }
 }

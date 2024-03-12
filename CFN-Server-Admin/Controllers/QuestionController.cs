@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using CFN_Server.Models;
-using CFN_Server.Services;
+using CFN_ServerAdmin.Models;
+using CFN_ServerAdmin.Services;
 
-namespace CFN_Server.Controllers
+namespace CFN_ServerAdmin.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -42,6 +42,24 @@ namespace CFN_Server.Controllers
             return CreatedAtAction(nameof(GetQuestion), new { id = newQuestion.Id }, newQuestion);
         }
 
+        [HttpPut("{id}")]
+        public IActionResult PutQuestion(int id, Question question)
+        {
+            _questionService.UpdateQuestion(id, question);
+            return NoContent();
+        }
 
+        [HttpDelete("{id}")]
+        public IActionResult DeleteQuestion(int id)
+        {
+            var question = _questionService.GetQuestionById(id);
+            if (question == null)
+            {
+                return NotFound();
+            }
+
+            _questionService.DeleteQuestion(id);
+            return NoContent();
+        }
     }
 }

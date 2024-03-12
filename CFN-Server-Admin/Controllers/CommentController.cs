@@ -2,10 +2,10 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using CFN_Server.Data;
-using CFN_Server.Models;
+using CFN_ServerAdmin.Data;
+using CFN_ServerAdmin.Models;
 
-namespace CFN_Server.Controllers
+namespace CFN_ServerAdmin.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -46,6 +46,34 @@ namespace CFN_Server.Controllers
             return CreatedAtAction(nameof(GetComment), new { id = comment.Id }, comment);
         }
 
+        [HttpPut("{id}")]
+        public IActionResult PutComment(int id, Comment comment)
+        {
+            if (id != comment.Id)
+            {
+                return BadRequest();
+            }
 
+            _context.Entry(comment).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteComment(int id)
+        {
+            var comment = _context.Comments.Find(id);
+
+            if (comment == null)
+            {
+                return NotFound();
+            }
+
+            _context.Comments.Remove(comment);
+            _context.SaveChanges();
+
+            return NoContent();
+        }
     }
 }
