@@ -29,7 +29,11 @@ const Suggestions = () => {
         );
         setSuggestions([
           ...suggestions,
-          { id: response.data.id, title: newSuggestion },
+          {
+            id: response.data.id,
+            title: newSuggestion,
+            status: "under consideration",
+          }, // Добавляем статус "under consideration" по умолчанию
         ]);
         setNewSuggestion("");
       } catch (error) {
@@ -64,9 +68,11 @@ const Suggestions = () => {
               {suggestions.map((suggestion) => (
                 <li
                   key={suggestion.id}
-                  className="border-b border-gray-200 p-4"
+                  className="border-b border-gray-200 p-4 flex justify-between items-center"
                 >
-                  {suggestion.title}
+                  <div>{suggestion.title}</div>
+                  <div className="text-gray-500">{suggestion.status}</div>{" "}
+                  {/* Отображаем статус рядом с предложением */}
                 </li>
               ))}
             </ul>
