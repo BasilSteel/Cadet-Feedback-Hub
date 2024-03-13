@@ -1,13 +1,20 @@
 import { useState, useEffect } from "react";
+import ReactPaginate from "react-paginate";
 
 const Suggestions = () => {
   const [suggestions, setSuggestions] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const perPage = 5; // Number of items per page
   const [isUpdating, setIsUpdating] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:5136/api/Suggestion")
       .then((response) => response.json())
-      .then((data) => setSuggestions(data))
+      .then((data) => {
+        // Отображаем элементы в обратном порядке
+        const reversedData = data.reverse();
+        setSuggestions(reversedData);
+      })
       .catch((error) => console.error("Error fetching suggestions:", error));
   }, []);
 
@@ -43,6 +50,7 @@ const Suggestions = () => {
           body: JSON.stringify({
             id: suggestion.id,
             title: suggestion.title,
+            content: suggestion.content,
             status: suggestion.status,
           }),
         }).then((response) => {
@@ -59,6 +67,13 @@ const Suggestions = () => {
       });
   };
 
+  const handlePageChange = ({ selected }) => {
+    setCurrentPage(selected);
+  };
+
+  const offset = currentPage * perPage;
+  const pageCount = Math.ceil(suggestions.length / perPage);
+
   return (
     <div className="bg-gray-100 min-h-screen">
       <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
@@ -73,7 +88,7 @@ const Suggestions = () => {
               {isUpdating ? "Обновление..." : "Обновить статусы"}
             </button>
             <ul className="bg-white shadow sm:rounded-lg">
-              {suggestions.map((suggestion) => (
+              {suggestions.slice(offset, offset + perPage).map((suggestion) => (
                 <li
                   key={suggestion.id}
                   className="border-b border-gray-200 p-4"
@@ -104,6 +119,37 @@ const Suggestions = () => {
                 </li>
               ))}
             </ul>
+            <ReactPaginate
+              previousLabel={"← Previous"}
+              nextLabel={"Next →"}
+              breakLabel={"..."}
+              pageCount={pageCount}
+              onPageChange={handlePageChange}
+              containerClassName={"flex justify-center mt-6"}
+              previousClassName={
+                "bg-white text-gray-700 px-4 py-2 rounded-l border border-gray-300"
+              }
+              nextClassName={
+                "bg-white text-gray-700 px-4 py-2 rounded-r border border-gray-300"
+              }
+              breakClassName={
+                "bg-white text-gray-700 px-4 py-2 border border-gray-300"
+              }
+              pageLinkClassName={
+                "bg-white border border-gray-300 px-4 py-2 mx-1 rounded"
+              }
+              disabledClassName={"text-gray-400"}
+              activeClassName={"bg-white text-blue-500 border border-blue-500"}
+              previousLinkClassName={
+                "bg-white border border-gray-300 px-4 py-2 mx-1 rounded-l"
+              }
+              nextLinkClassName={
+                "bg-white border border-gray-300 px-4 py-2 mx-1 rounded-r"
+              }
+              activeLinkClassName={
+                "bg-white border border-gray-300 px-4 py-2 mx-1 rounded"
+              }
+            />
           </div>
         </div>
       </div>

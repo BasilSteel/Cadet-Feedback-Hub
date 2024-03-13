@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
+import ReactPaginate from "react-paginate";
 
 const QandA = () => {
   // Состояния для списка вопросов и ответов
   const [qaList, setQAList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const perPage = 5; // Количество элементов на странице
 
   useEffect(() => {
     fetch("http://localhost:5136/api/Question")
@@ -10,7 +13,7 @@ const QandA = () => {
       .then((data) => {
         // Фильтрация списка вопросов и ответов, оставляя только те, у которых есть ответ
         const filteredQAList = data.filter((qa) => qa.answerText !== null);
-        setQAList(filteredQAList);
+        setQAList(filteredQAList.reverse()); // Отображаем вопросы и ответы в обратном порядке
       })
       .catch((error) => console.error("Error fetching questions:", error));
   }, []);
@@ -38,7 +41,7 @@ const QandA = () => {
                 const filteredQAList = data.filter(
                   (qa) => qa.answerText !== null
                 );
-                setQAList(filteredQAList);
+                setQAList(filteredQAList.reverse()); // Отображаем вопросы и ответы в обратном порядке
               })
               .catch((error) =>
                 console.error("Error fetching questions:", error)
@@ -50,6 +53,13 @@ const QandA = () => {
         .catch((error) => console.error("Error adding question:", error));
     }
   };
+
+  const handlePageChange = ({ selected }) => {
+    setCurrentPage(selected);
+  };
+
+  const offset = currentPage * perPage;
+  const pageCount = Math.ceil(qaList.length / perPage);
 
   return (
     <div className="bg-gray-100 min-h-screen">
@@ -76,7 +86,7 @@ const QandA = () => {
           </div>
           {/* Список вопросов и ответов */}
           <div className="mt-6">
-            {qaList.map((qa) => (
+            {qaList.slice(offset, offset + perPage).map((qa) => (
               <div
                 key={qa.id}
                 className="bg-white shadow sm:rounded-lg p-4 mt-4"
@@ -86,6 +96,38 @@ const QandA = () => {
               </div>
             ))}
           </div>
+          {/* Пагинация */}
+          <ReactPaginate
+            previousLabel={"← Назад"}
+            nextLabel={"Вперед →"}
+            breakLabel={"..."}
+            pageCount={pageCount}
+            onPageChange={handlePageChange}
+            containerClassName={"flex justify-center mt-6"}
+            previousClassName={
+              "bg-white text-gray-700 px-4 py-2 rounded-l border border-gray-300"
+            }
+            nextClassName={
+              "bg-white text-gray-700 px-4 py-2 rounded-r border border-gray-300"
+            }
+            breakClassName={
+              "bg-white text-gray-700 px-4 py-2 border border-gray-300"
+            }
+            pageLinkClassName={
+              "bg-white border border-gray-300 px-4 py-2 mx-1 rounded"
+            }
+            disabledClassName={"text-gray-400"}
+            activeClassName={"bg-white text-blue-500 border border-blue-500"}
+            previousLinkClassName={
+              "bg-white border border-gray-300 px-4 py-2 mx-1 rounded-l"
+            }
+            nextLinkClassName={
+              "bg-white border border-gray-300 px-4 py-2 mx-1 rounded-r"
+            }
+            activeLinkClassName={
+              "bg-white border border-gray-300 px-4 py-2 mx-1 rounded"
+            }
+          />
         </div>
       </div>
     </div>

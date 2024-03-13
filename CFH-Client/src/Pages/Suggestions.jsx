@@ -1,14 +1,19 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import ReactPaginate from "react-paginate";
 
 const Suggestions = () => {
   const [suggestions, setSuggestions] = useState([]);
   const [newSuggestion, setNewSuggestion] = useState("");
+  const [currentPage, setCurrentPage] = useState(0);
+  const perPage = 5; // Количество элементов на странице
 
   const fetchSuggestions = async () => {
     try {
       const response = await axios.get("http://localhost:5136/api/Suggestion");
-      setSuggestions(response.data);
+      // Отображаем элементы в обратном порядке
+      const reversedSuggestions = response.data.reverse();
+      setSuggestions(reversedSuggestions);
     } catch (error) {
       console.error("Failed to fetch suggestions:", error);
     }
@@ -27,20 +32,26 @@ const Suggestions = () => {
             title: newSuggestion,
           }
         );
-        setSuggestions([
-          ...suggestions,
-          {
-            id: response.data.id,
-            title: newSuggestion,
-            status: "under consideration",
-          }, // Добавляем статус "under consideration" по умолчанию
-        ]);
+        const newSuggestionObj = {
+          id: response.data.id,
+          title: newSuggestion,
+          status: "under consideration",
+        };
+        // Добавляем новое предложение в начало массива
+        setSuggestions([newSuggestionObj, ...suggestions]);
         setNewSuggestion("");
       } catch (error) {
         console.error("Failed to add suggestion:", error);
       }
     }
   };
+
+  const handlePageChange = ({ selected }) => {
+    setCurrentPage(selected);
+  };
+
+  const offset = currentPage * perPage;
+  const pageCount = Math.ceil(suggestions.length / perPage);
 
   return (
     <div className="bg-gray-100 min-h-screen">
@@ -65,17 +76,64 @@ const Suggestions = () => {
           </div>
           <div className="mt-6">
             <ul className="bg-white shadow sm:rounded-lg">
-              {suggestions.map((suggestion) => (
+              {suggestions.slice(offset, offset + perPage).map((suggestion) => (
                 <li
                   key={suggestion.id}
                   className="border-b border-gray-200 p-4 flex justify-between items-center"
                 >
                   <div>{suggestion.title}</div>
-                  <div className="text-gray-500">{suggestion.status}</div>{" "}
-                  {/* Отображаем статус рядом с предложением */}
+                  <div className="text-gray-500">{suggestion.status}</div>
                 </li>
               ))}
             </ul>
+            <ReactPaginate
+              previousLabel={"← Назад"}
+              nextLabel={"Вперед →"}
+              breakLabel={"..."}
+              pageCount={pageCount}
+              onPageChange={handlePageChange}
+              containerClassName={"flex justify-center mt-6"}
+              previousClassName={
+                "bg-white text-gray-700 px-4 py-2 rounded-l border border-gray-300"
+              }
+              nextClassName={
+                "bg-white text-gray-700 px-4 py-2 rounded-r border border-gray-300"
+              }
+              breakClassName={
+                "bg-white text-gray-700 px-4 py-2 border border-gray-300"
+              }
+              pageLinkClassName={
+                "bg-white border border-gray-300 px-4 py-2 mx-1 rounded"
+              }
+              disabledClassName={"text-gray-400"}
+              activeClassName={"bg-white text-blue-500 border border-blue-500"}
+              previousLinkClassName={
+                "bg-white border border-gray-300 px-4 py-2 mx-1 rounded-l"
+              }
+              nextLinkClassName={
+                "bg-white border border-gray-300 px-4 py-2 mx-1 rounded-r"
+              }
+              activeLinkClassName={
+                "bg-white border border-gray-300 px-4 py-2 mx-1 rounded"
+              }
+            >
+              <div className="flex">
+                <div className="bg-white border border-gray-300 px-4 py-2 mx-1 rounded-l">
+                  ← Назад
+                </div>
+                {[...Array(pageCount)].map((_, index) => (
+                  <div
+                    key={index}
+                    className="bg-white border border-gray-300 px-4 py-2 mx-1 rounded"
+                  >
+                    {index + 1}
+                  </div>
+                ))}
+                <div className="bg-white border border-gray-300 px-4 py-2 mx-1 rounded-r">
+                  Вперед →
+                </div>
+              </div>
+            </ReactPaginate>
           </div>
         </div>
       </div>
