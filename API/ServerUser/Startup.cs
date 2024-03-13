@@ -46,7 +46,7 @@ namespace CFN_Server
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowLocalhost",
-                    builder => builder.WithOrigins("http://client:3000")
+                    builder => builder.WithOrigins("http://localhost:3000")
                                       .AllowAnyHeader()
                                       .AllowAnyMethod());
             });

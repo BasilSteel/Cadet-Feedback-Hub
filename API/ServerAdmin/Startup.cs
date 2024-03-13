@@ -63,7 +63,7 @@ namespace CFN_ServerAdmin
                 options.AddPolicy("AllowLocalhost3001",
                     builder =>
                     {
-                        builder.WithOrigins("http://admin:3001")
+                        builder.WithOrigins("http://localhost:3001")
                                .AllowAnyHeader()
                                .AllowAnyMethod();
                     });
