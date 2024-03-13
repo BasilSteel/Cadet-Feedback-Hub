@@ -27,12 +27,18 @@ const isAuthenticated = () => {
 };
 
 const PrivateRoute = ({ element, ...props }) => {
-  return isAuthenticated() ? element : <Navigate to="/login" replace />;
+  return isAuthenticated() ? (
+    <>
+      <Navbar />
+      {element}
+    </>
+  ) : (
+    <Navigate to="/login" replace />
+  );
 };
 
 const App = () => (
   <Router>
-    <Navbar />
     <Routes>
       <Route path="/" element={<PrivateRoute element={<Discussion />} />} />
       <Route

@@ -117,11 +117,9 @@ const Suggestions = () => {
                         handleChangeStatus(suggestion.id, e.target.value)
                       }
                     >
-                      <option value="under consideration">
-                        Under Consideration
-                      </option>
-                      <option value="adopted">Adopted</option>
-                      <option value="rejected">Rejected</option>
+                      <option value="на рассмотрении">на рассмотрении</option>
+                      <option value="принято">принято</option>
+                      <option value="отклонено">отклонено</option>
                     </select>
                   </div>
                   <button
@@ -134,8 +132,8 @@ const Suggestions = () => {
               ))}
             </ul>
             <ReactPaginate
-              previousLabel={"← Previous"}
-              nextLabel={"Next →"}
+              previousLabel={"← Назад"}
+              nextLabel={"Вперед →"}
               breakLabel={"..."}
               pageCount={pageCount}
               onPageChange={handlePageChange}

@@ -1,7 +1,5 @@
-using CFN_Server.Models;
 using CFN_Server.Data;
-using Microsoft.EntityFrameworkCore;
-
+using CFN_Server.Models;
 namespace CFN_Server.Services
 {
     public class SuggestionService : ISuggestionService

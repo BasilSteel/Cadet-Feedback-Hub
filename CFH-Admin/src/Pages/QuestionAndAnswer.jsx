@@ -81,7 +81,7 @@ const QuestionAndAnswer = () => {
       <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <div className="px-4 py-6 sm:px-0">
           <div className="mt-6">
-            <h2 className="text-lg font-semibold">Q&A</h2>
+            <h2 className="text-lg font-semibold">Вопрос & Ответ</h2>
             <ul className="bg-white shadow sm:rounded-lg">
               {qaList.slice(offset, offset + perPage).map((qa) => (
                 <li key={qa.id} className="border-b border-gray-200 p-4">

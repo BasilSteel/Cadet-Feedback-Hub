@@ -35,7 +35,7 @@ const Feedback = () => {
       <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <div className="px-4 py-6 sm:px-0">
           <div className="mt-6">
-            <h2 className="text-lg font-semibold">Feedback</h2>
+            <h2 className="text-lg font-semibold">Обратная связь</h2>
             <ul className="bg-white shadow sm:rounded-lg">
               {feedbackList.slice(offset, offset + perPage).map((feedback) => (
                 <li key={feedback.id} className="border-b border-gray-200 p-4">
@@ -44,8 +44,8 @@ const Feedback = () => {
               ))}
             </ul>
             <ReactPaginate
-              previousLabel={"← Previous"}
-              nextLabel={"Next →"}
+              previousLabel={"← Назад"}
+              nextLabel={"Вперед →"}
               breakLabel={"..."}
               pageCount={pageCount}
               onPageChange={handlePageChange}

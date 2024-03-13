@@ -8,12 +8,12 @@
 
         public Suggestion()
         {
-            Status = "under consideration";
+            Status = "на рассмотрении";
         }
 
         public void SetStatus(string status)
         {
-            if (status == "under consideration" || status == "adopted" || status == "rejected")
+            if (status == "на рассмотрении" || status == "принято" || status == "отклонено")
             {
                 Status = status;
             }

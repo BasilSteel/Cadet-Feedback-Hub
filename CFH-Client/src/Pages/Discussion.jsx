@@ -1,6 +1,23 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 
+const BackArrow = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="h-6 w-6 inline-block align-middle mr-2"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M10 19l-7-7m0 0l7-7m-7 7h18"
+    />
+  </svg>
+);
+
 const Discussion = () => {
   const { id } = useParams();
   const [discussion, setDiscussion] = useState(null);
@@ -64,8 +81,11 @@ const Discussion = () => {
     <div className="bg-gray-100 min-h-screen">
       <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <div className="px-4 py-6 sm:px-0">
-          <Link to="/Discussions" className="text-blue-500 hover:underline">
-            Назад
+          <Link
+            to="/Discussions"
+            className="text-blue-500 hover:underline flex items-center mb-4"
+          >
+            <BackArrow /> Назад
           </Link>
           {discussion ? (
             <div className="bg-white shadow sm:rounded-lg p-4 mt-4">
@@ -76,7 +96,7 @@ const Discussion = () => {
             <p>Loading...</p>
           )}
 
-          <h2 className="text-lg font-semibold mt-6">Comments</h2>
+          <h2 className="text-lg font-semibold mt-6">Комментарии</h2>
           {/* Список комментариев к теме */}
           <ul className="mt-2">
             {comments.map((comment) => (
