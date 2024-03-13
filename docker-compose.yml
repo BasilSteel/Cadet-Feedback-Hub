@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  api:
+    build: ./API
+    ports:
+      - "5000:80"
+    networks:
+      - backend
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=CFNdb;Username=CFNadmin;Password=ZiuRCR2e3NN2LMgZSLR4
+
+  client:
+    build: ./Client/Client
+    ports:
+      - "3000:3000"
+    networks:
+      - frontend
+
+  admin:
+    build: ./Client/Admin
+    ports:
+      - "3001:3000"
+    networks:
+      - frontend
+
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_DB: CFNdb
+      POSTGRES_USER: CFNadmin
+      POSTGRES_PASSWORD: ZiuRCR2e3NN2LMgZSLR4
+    networks:
+      - backend
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+networks:
+  frontend:
+  backend:
+
+volumes:
+  pgdata:
