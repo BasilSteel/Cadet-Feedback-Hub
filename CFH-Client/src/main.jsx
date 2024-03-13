@@ -18,7 +18,7 @@ const App = () => (
       <Route path="/Qanda" element={<QandA />} />
       <Route path="/Discussions" element={<Discussions />} />
       <Route path="/Feedback" element={<Feedback />} />
-      <Route path="/discussion/:id" element={<Discussion />} />{" "}
+      <Route path="/discussion/:id" element={<Discussion />} />
     </Routes>
   </Router>
 );
