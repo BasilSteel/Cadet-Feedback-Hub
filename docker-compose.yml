@@ -4,7 +4,7 @@ services:
   api_admin:
     build: ./API/ServerAdmin
     ports:
-      - "4001:80"
+      - "4001:4001"
     networks:
       - backend
     environment:
@@ -15,7 +15,7 @@ services:
   api_user:
     build: ./API/ServerUser
     ports:
-      - "4000:80"
+      - "4000:4000"
     networks:
       - backend
 
