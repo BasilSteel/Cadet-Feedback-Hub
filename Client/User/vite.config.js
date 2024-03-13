@@ -1,10 +1,11 @@
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  build: {
+    outDir: "dist/user", // Путь для сборки пользовательского приложения
+    assetsDir: ".", // Папка с assets пользовательского приложения
+  },
   server: {
-    port: 3000,
+    port: 3000, // Порт для пользовательского приложения
   },
 });
