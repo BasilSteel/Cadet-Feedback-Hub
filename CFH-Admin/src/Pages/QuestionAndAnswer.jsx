@@ -7,7 +7,13 @@ const QuestionAndAnswer = () => {
   const perPage = 5; // Number of items per page
 
   useEffect(() => {
-    fetch("http://localhost:5136/api/Question")
+    const token = localStorage.getItem("token");
+
+    fetch("http://localhost:5136/api/Question", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         // Отображаем элементы в обратном порядке
@@ -22,10 +28,13 @@ const QuestionAndAnswer = () => {
       qa.id === questionId ? { ...qa, answerText: newAnswer } : qa
     );
 
+    const token = localStorage.getItem("token");
+
     fetch(`http://localhost:5136/api/Question/${questionId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ answerText: newAnswer }),
     })
@@ -42,8 +51,13 @@ const QuestionAndAnswer = () => {
   const handleDeleteQuestion = (questionId) => {
     const updatedQAList = qaList.filter((qa) => qa.id !== questionId);
 
+    const token = localStorage.getItem("token");
+
     fetch(`http://localhost:5136/api/Question/${questionId}`, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     })
       .then((response) => {
         if (response.ok) {

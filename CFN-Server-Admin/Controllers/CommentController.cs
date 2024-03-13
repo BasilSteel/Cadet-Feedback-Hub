@@ -1,14 +1,16 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using CFN_ServerAdmin.Data;
 using CFN_ServerAdmin.Models;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace CFN_ServerAdmin.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
+
     public class CommentController : ControllerBase
     {
         private readonly DbContextCFN _context;

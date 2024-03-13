@@ -8,7 +8,13 @@ const Suggestions = () => {
   const [isUpdating, setIsUpdating] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:5136/api/Suggestion")
+    const token = localStorage.getItem("token");
+
+    fetch("http://localhost:5136/api/Suggestion", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         // Отображаем элементы в обратном порядке
@@ -19,8 +25,13 @@ const Suggestions = () => {
   }, []);
 
   const handleDeleteSuggestion = (id) => {
+    const token = localStorage.getItem("token");
+
     fetch(`http://localhost:5136/api/Suggestion/${id}`, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     })
       .then(() => {
         setSuggestions(
@@ -40,12 +51,15 @@ const Suggestions = () => {
 
   const handleUpdateStatuses = () => {
     setIsUpdating(true);
+    const token = localStorage.getItem("token");
+
     Promise.all(
       suggestions.map((suggestion) =>
         fetch(`http://localhost:5136/api/Suggestion/${suggestion.id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             id: suggestion.id,

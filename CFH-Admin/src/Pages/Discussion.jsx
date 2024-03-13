@@ -9,7 +9,12 @@ const Discussion = () => {
 
   const fetchDiscussions = async () => {
     try {
-      const response = await fetch("http://localhost:5136/api/Discussion");
+      const token = localStorage.getItem("token");
+      const response = await fetch("http://localhost:5136/api/Discussion", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const data = await response.json();
       // Отображаем элементы в обратном порядке
       setDiscussionList(data.reverse());
@@ -23,9 +28,11 @@ const Discussion = () => {
   }, []);
 
   const handleCreateDiscussion = () => {
+    const token = localStorage.getItem("token");
     fetch("http://localhost:5136/api/Discussion", {
       method: "POST",
       headers: {
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ title: newDiscussionTitle }),
@@ -45,8 +52,12 @@ const Discussion = () => {
   };
 
   const handleDeleteDiscussion = (discussionId) => {
+    const token = localStorage.getItem("token");
     fetch(`http://localhost:5136/api/Discussion/${discussionId}`, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     })
       .then((response) => {
         if (response.ok) {

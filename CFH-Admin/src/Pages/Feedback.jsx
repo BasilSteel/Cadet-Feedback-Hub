@@ -7,7 +7,13 @@ const Feedback = () => {
   const perPage = 5; // Number of items per page
 
   useEffect(() => {
-    fetch("http://localhost:5136/api/Feedback")
+    const token = localStorage.getItem("token");
+
+    fetch("http://localhost:5136/api/Feedback", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         // Отображаем элементы в обратном порядке

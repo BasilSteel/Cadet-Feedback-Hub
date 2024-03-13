@@ -1,12 +1,15 @@
 ﻿using CFN_ServerAdmin.Models;
 using CFN_ServerAdmin.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace CFN_ServerAdmin
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
+
     public class SuggestionController : ControllerBase
     {
         private readonly ISuggestionService _suggestionService;

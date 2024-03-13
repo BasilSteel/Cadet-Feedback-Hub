@@ -1,13 +1,12 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using CFN_ServerAdmin.Data;
 using CFN_ServerAdmin.Services;
-using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.OpenApi.Models;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+
+
 
 namespace CFN_ServerAdmin
 {
@@ -22,6 +21,21 @@ namespace CFN_ServerAdmin
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = false,
+                    ValidateLifetime = true,
+                    ValidateAudience = false,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("tX6OvbcF0WmFCwoUMnnHaEbKeAOOAjgLKFQnSWA5ZTkC8n2GAqqLpHonrTj4lk88mAHpJzZGCT6RSzRDTqvqcnI2p1kL7VrghRi")),
+                    ClockSkew = TimeSpan.Zero
+                };
+            });
+
+            services.AddControllers();
             services.AddControllersWithViews();
 
             services.AddControllers()
@@ -40,6 +54,7 @@ namespace CFN_ServerAdmin
             services.AddScoped<IQAService, QAService>();
             services.AddScoped<IDiscussionService, DiscussionService>();
             services.AddScoped<ISuggestionService, SuggestionService>();
+            services.AddScoped<IAuthService, AuthService>();
 
 
             // Добавление CORS
@@ -77,9 +92,17 @@ namespace CFN_ServerAdmin
 
             app.UseRouting();
 
-            app.UseCors("AllowLocalhost"); // Добавление CORS
+            app.UseCors(builder =>
+                builder.WithOrigins("http://localhost:5173")
+                       .AllowAnyHeader()
+                       .AllowAnyMethod());
 
+            app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseMiddleware<AuthErrorHandlingMiddleware>(); // Обработка ошибок аутентификации
+            app.UseMiddleware<ErrorHandlingMiddleware>();
+
 
             app.UseEndpoints(endpoints =>
             {
@@ -89,6 +112,8 @@ namespace CFN_ServerAdmin
                 endpoints.MapControllers();
             });
         }
+
+
 
     }
 }

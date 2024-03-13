@@ -1,12 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using CFN_ServerAdmin.Models;
 using CFN_ServerAdmin.Services;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace CFN_ServerAdmin.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
+
     public class QuestionController : ControllerBase
     {
         private readonly IQAService _questionService;
