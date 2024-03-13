@@ -3,13 +3,13 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build_admin
 WORKDIR /app
 
 # Copy the project file and restore dependencies for ServerAdmin
-COPY ./CFN-Server.csproj API/ServerAdmin/
-RUN dotnet restore API/ServerAdmin/CFN-Server.csproj
+COPY CFN-Server.csproj .
+RUN dotnet restore CFN-Server.csproj
 
 # Copy the remaining files and build the application for ServerAdmin
 COPY . .
-WORKDIR /app/API/ServerAdmin
-RUN dotnet build CFN-Server.csproj -c Release -o ./app/build/admin
+WORKDIR /app
+RUN dotnet build CFN-Server.csproj -c Release -o ./build/admin
 
 # Stage 2 - Publish the application for ServerAdmin
 FROM build_admin AS publish_admin

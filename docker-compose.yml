@@ -4,7 +4,7 @@ services:
   api_admin:
     build: ./API/ServerAdmin
     ports:
-      - "5000:80"
+      - "4001:80"
     networks:
       - backend
     environment:
@@ -15,7 +15,7 @@ services:
   api_user:
     build: ./API/ServerUser
     ports:
-      - "5001:80"
+      - "4000:80"
     networks:
       - backend
 
@@ -25,6 +25,8 @@ services:
       - "3000:3000"
     networks:
       - frontend
+    volumes:
+      - ./Client/User:/app
 
   admin:
     build: ./Client/Admin
@@ -32,6 +34,8 @@ services:
       - "3001:3001"
     networks:
       - frontend
+    volumes:
+      - ./Client/Admin:/app
 
   db:
     image: postgres:latest
@@ -48,6 +52,7 @@ services:
 networks:
   frontend:
   backend:
+
 
 volumes:
   pgdata:

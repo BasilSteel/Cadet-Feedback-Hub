@@ -3,13 +3,13 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build_user
 WORKDIR /app
 
 # Copy the project file and restore dependencies for ServerUser
-COPY ./CFN-Server.csproj API/ServerUser/
-RUN dotnet restore API/ServerUser/CFN-Server.csproj
+COPY CFN-Server.csproj .
+RUN dotnet restore CFN-Server.csproj
 
 # Copy the remaining files and build the application for ServerUser
 COPY . .
-WORKDIR /app/API/ServerUser
-RUN dotnet build CFN-Server.csproj -c Release -o /app/build/user
+WORKDIR /app
+RUN dotnet build CFN-Server.csproj -c Release -o ./build/user
 
 # Stage 2 - Publish the application for ServerUser
 FROM build_user AS publish_user

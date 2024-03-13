@@ -12,12 +12,7 @@ namespace CFN_Server
         {
             var host = CreateHostBuilder(args).Build();
 
-            using (var scope = host.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
-                var dbContext = services.GetRequiredService<DbContextCFN>();
-                dbContext.Database.Migrate();
-            }
+            // Удаление строки с dbContext.Database.Migrate();
 
             host.Run();
         }
