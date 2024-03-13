@@ -4,7 +4,7 @@ services:
   api_admin:
     build: ./API/ServerAdmin
     ports:
-      - "4001:4001"
+      - "4001:80"
     networks:
       - backend
     environment:
@@ -15,9 +15,13 @@ services:
   api_user:
     build: ./API/ServerUser
     ports:
-      - "4000:4000"
+      - "4000:80"
     networks:
       - backend
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=CFNdb;Username=CFNadmin;Password=ZiuRCR2e3NN2LMgZSLR4
 
   client:
     build: ./Client/User
@@ -25,8 +29,6 @@ services:
       - "3000:3000"
     networks:
       - frontend
-    volumes:
-      - ./Client/User:/app
 
   admin:
     build: ./Client/Admin
@@ -34,8 +36,6 @@ services:
       - "3001:3001"
     networks:
       - frontend
-    volumes:
-      - ./Client/Admin:/app
 
   db:
     image: postgres:latest

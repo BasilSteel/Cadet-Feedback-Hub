@@ -1,22 +1,19 @@
-# Stage 1 - Build the application for ServerAdmin
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build_admin
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
+EXPOSE 4001
 
-# Copy the project file and restore dependencies for ServerAdmin
-COPY CFN-Server.csproj .
-RUN dotnet restore CFN-Server.csproj
-
-# Copy the remaining files and build the application for ServerAdmin
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+COPY ["CFN-Server.csproj", "."]
+RUN dotnet restore "./CFN-Server.csproj"
 COPY . .
-WORKDIR /app
-RUN dotnet build CFN-Server.csproj -c Release -o ./build/admin
+WORKDIR "/src/."
+RUN dotnet build "CFN-Server.csproj" -c Release -o /app/build
 
-# Stage 2 - Publish the application for ServerAdmin
-FROM build_admin AS publish_admin
-RUN dotnet publish CFN-Server.csproj -c Release -o /app/publish/admin
+FROM build AS publish
+RUN dotnet publish "CFN-Server.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
-# Stage 3 - Create the final image for ServerAdmin
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS admin
+FROM base AS final
 WORKDIR /app
-COPY --from=publish_admin /app/publish/admin .
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "CFN-Server.dll"]

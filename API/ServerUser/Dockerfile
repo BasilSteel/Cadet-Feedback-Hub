@@ -1,22 +1,19 @@
-# Stage 1 - Build the application for ServerUser
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build_user
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
+EXPOSE 4000
 
-# Copy the project file and restore dependencies for ServerUser
-COPY CFN-Server.csproj .
-RUN dotnet restore CFN-Server.csproj
-
-# Copy the remaining files and build the application for ServerUser
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+COPY ["CFN-Server.csproj", "."]
+RUN dotnet restore "./CFN-Server.csproj"
 COPY . .
-WORKDIR /app
-RUN dotnet build CFN-Server.csproj -c Release -o ./build/user
+WORKDIR "/src/."
+RUN dotnet build "CFN-Server.csproj" -c Release -o /app/build
 
-# Stage 2 - Publish the application for ServerUser
-FROM build_user AS publish_user
-RUN dotnet publish CFN-Server.csproj -c Release -o /app/publish/user
+FROM build AS publish
+RUN dotnet publish "CFN-Server.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
-# Stage 3 - Create the final image for ServerUser
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS user
+FROM base AS final
 WORKDIR /app
-COPY --from=publish_user /app/publish/user .
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "CFN-Server.dll"]
