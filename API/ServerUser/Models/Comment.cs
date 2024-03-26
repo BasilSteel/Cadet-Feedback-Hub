@@ -1,5 +1,6 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-
+using System.ComponentModel.DataAnnotations.Schema;
 namespace CFN_Server.Models
 {
     public class Comment
@@ -9,9 +10,9 @@ namespace CFN_Server.Models
 
         public string Text { get; set; }
 
-        // [ForeignKey("Discussion")]
+        [ForeignKey("Discussion")]
         public int? DiscussionId { get; set; }
 
-        // public Discussion? Discussion { get; set; }
+        public Discussion? Discussion { get; set; }
     }
 }

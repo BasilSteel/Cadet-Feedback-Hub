@@ -77,5 +77,35 @@ namespace CFN_ServerAdmin.Controllers
 
             return NoContent();
         }
+        [HttpGet("/api/Discussion/{discussionId}/comments")]
+        public ActionResult<IEnumerable<Comment>> GetCommentsForDiscussion(int discussionId)
+        {
+            var comments = _context.Comments.Where(c => c.DiscussionId == discussionId).ToList();
+
+            if (comments == null || comments.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return comments;
+        }
+        [HttpPost("/api/Discussion/{discussionId}/comments")]
+        public ActionResult<Comment> PostCommentForDiscussion(int discussionId, Comment comment)
+        {
+            var discussion = _context.Discussions.Find(discussionId);
+
+            if (discussion == null)
+            {
+                return NotFound("Discussion not found");
+            }
+
+            comment.DiscussionId = discussionId;
+            _context.Comments.Add(comment);
+            _context.SaveChanges();
+
+            return CreatedAtAction(nameof(GetComment), new { id = comment.Id }, comment);
+        }
+
+
     }
 }

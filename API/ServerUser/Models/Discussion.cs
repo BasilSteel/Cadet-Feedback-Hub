@@ -1,5 +1,6 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-
+using System.ComponentModel.DataAnnotations.Schema;
 namespace CFN_Server.Models
 {
     public class Discussion
@@ -9,6 +10,10 @@ namespace CFN_Server.Models
 
         public string Title { get; set; }
 
-        // public ICollection<Comment>? Comments { get; set; }
+        public ICollection<Comment>? Comments { get; set; }
+        public Discussion()
+        {
+            Comments = new List<Comment>();
+        }
     }
 }
