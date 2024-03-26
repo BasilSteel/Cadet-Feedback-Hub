@@ -13,6 +13,8 @@ import Feedback from "./Pages/Feedback";
 import QuestionAndAnswer from "./Pages/QuestionAndAnswer";
 import Suggestions from "./Pages/Suggestions";
 import LoginPage from "./Pages/LoginPage";
+import QuestionListPage from "./Pages/QuestionListPage";
+import AnswerQuestionPage from "./Pages/AnswerQuestionPage";
 
 const isAuthenticated = () => {
   const token = localStorage.getItem("token");
@@ -58,6 +60,14 @@ const App = () => (
         element={<PrivateRoute element={<Suggestions />} />}
       />
       <Route path="/login" element={<LoginPage />} />
+      <Route
+        path="/questions"
+        element={<PrivateRoute element={<QuestionListPage />} />}
+      />
+      <Route
+        path="/answer/:questionId"
+        element={<PrivateRoute element={<AnswerQuestionPage />} />}
+      />
     </Routes>
   </Router>
 );
