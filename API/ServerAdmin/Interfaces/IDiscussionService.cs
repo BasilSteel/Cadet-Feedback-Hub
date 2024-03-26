@@ -9,5 +9,7 @@ namespace CFN_ServerAdmin.Services
         Discussion CreateDiscussion(Discussion discussion);
         void UpdateDiscussion(int id, Discussion discussion);
         void DeleteDiscussion(int id);
+        void DeleteDiscussionAndComments(int discussionId);
+
     }
 }

@@ -60,10 +60,18 @@ namespace CFN_ServerAdmin.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteDiscussion(int id)
+        public IActionResult DeleteDiscussionAndComments(int id)
         {
-            _discussionService.DeleteDiscussion(id);
+            var discussion = _discussionService.GetDiscussionById(id);
+
+            if (discussion == null)
+            {
+                return NotFound();
+            }
+
+            _discussionService.DeleteDiscussionAndComments(id);
             return NoContent();
         }
+
     }
 }

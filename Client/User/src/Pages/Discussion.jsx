@@ -76,6 +76,9 @@ const Discussion = () => {
       const data = await response.json();
       setComments([...comments, data]);
       setNewCommentText("");
+
+      // Обновление страницы
+      window.location.reload();
     } catch (error) {
       console.error("Error adding comment:", error);
     }

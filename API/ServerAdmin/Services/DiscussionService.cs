@@ -1,5 +1,6 @@
 using CFN_ServerAdmin.Models;
 using CFN_ServerAdmin.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace CFN_ServerAdmin.Services
 {
@@ -35,7 +36,6 @@ namespace CFN_ServerAdmin.Services
             if (existingDiscussion != null)
             {
                 existingDiscussion.Title = discussion.Title;
-                // Предположим, что обновление комментариев не поддерживается в данной реализации
                 _context.SaveChanges();
             }
         }
@@ -49,5 +49,17 @@ namespace CFN_ServerAdmin.Services
                 _context.SaveChanges();
             }
         }
+        public void DeleteDiscussionAndComments(int discussionId)
+        {
+            var discussion = _context.Discussions.Include(d => d.Comments).FirstOrDefault(d => d.Id == discussionId);
+
+            if (discussion != null)
+            {
+                _context.Comments.RemoveRange(discussion.Comments);
+                _context.Discussions.Remove(discussion);
+                _context.SaveChanges();
+            }
+        }
+
     }
 }
