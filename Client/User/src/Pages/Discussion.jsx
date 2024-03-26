@@ -39,9 +39,11 @@ const Discussion = () => {
 
     const fetchComments = async () => {
       try {
-        const response = await fetch(`http://localhost:4000/api/Comment`);
+        const response = await fetch(
+          `http://localhost:4000/api/Discussion/${id}/comments`
+        );
         const data = await response.json();
-        setComments(data.filter((comment) => comment.discussionId === id));
+        setComments(data);
       } catch (error) {
         console.error("Error fetching comments:", error);
       }
@@ -58,17 +60,19 @@ const Discussion = () => {
 
     const newComment = {
       text: newCommentText,
-      discussionId: id,
     };
 
     try {
-      const response = await fetch("http://localhost:4000/api/Comment", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newComment),
-      });
+      const response = await fetch(
+        `http://localhost:4000/api/Discussion/${id}/comments`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newComment),
+        }
+      );
       const data = await response.json();
       setComments([...comments, data]);
       setNewCommentText("");
@@ -98,13 +102,17 @@ const Discussion = () => {
 
           <h2 className="text-lg font-semibold mt-6">Комментарии</h2>
           {/* Список комментариев к теме */}
-          <ul className="mt-2">
-            {comments.map((comment) => (
-              <li key={comment.id} className="text-gray-700">
-                {comment.text}
-              </li>
-            ))}
-          </ul>
+          {comments.length > 0 ? (
+            <ul className="mt-2">
+              {comments.map((comment) => (
+                <li key={comment.id} className="text-gray-700">
+                  {comment.text}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>Нет комментариев</p>
+          )}
 
           {/* Форма для добавления нового комментария */}
           <div className="mt-4">
