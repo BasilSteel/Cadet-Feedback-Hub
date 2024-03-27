@@ -10,7 +10,6 @@ import "./index.css";
 import Navbar from "./Components/Navbar";
 import Discussion from "./Pages/Discussion";
 import Feedback from "./Pages/Feedback";
-import QuestionAndAnswer from "./Pages/QuestionAndAnswer";
 import Suggestions from "./Pages/Suggestions";
 import LoginPage from "./Pages/LoginPage";
 import QuestionListPage from "./Pages/QuestionListPage";
@@ -50,10 +49,6 @@ const App = () => (
       <Route
         path="/Feedback"
         element={<PrivateRoute element={<Feedback />} />}
-      />
-      <Route
-        path="/QuestionAndAnswer"
-        element={<PrivateRoute element={<QuestionAndAnswer />} />}
       />
       <Route
         path="/Suggestions"

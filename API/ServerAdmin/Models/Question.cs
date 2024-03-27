@@ -11,9 +11,12 @@ namespace CFN_ServerAdmin.Models
 
         public string? AnswerText { get; set; }
 
+        public bool ResponseStatus => AnswerText != null;
+        public DateTime QuestionDateTime { get; set; }
         public Question()
         {
             AnswerText = null;
+            QuestionDateTime = DateTime.Now.ToUniversalTime();
         }
     }
 }

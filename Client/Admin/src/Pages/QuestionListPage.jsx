@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { format } from "date-fns";
 
 const QuestionListPage = () => {
   const [questions, setQuestions] = useState([]);
@@ -48,6 +49,21 @@ const QuestionListPage = () => {
               <li key={question.id} className="border-b border-gray-200 p-4">
                 <div>
                   <p>{question.questionText}</p>
+                  <p className="text-gray-500 text-sm">
+                    {format(
+                      new Date(question.questionDateTime),
+                      "dd.MM.yyyy HH:mm"
+                    )}
+                  </p>
+                  <p
+                    className={
+                      question.responseStatus
+                        ? "text-green-600"
+                        : "text-red-600"
+                    }
+                  >
+                    {question.responseStatus ? "Есть ответ" : "Ответа нету"}
+                  </p>
                   <button
                     className="mt-2 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
                     onClick={() => handleDeleteQuestion(question.id)}

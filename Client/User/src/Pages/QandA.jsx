@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
+import { format } from "date-fns";
 
 const QandA = () => {
   // Состояния для списка вопросов и ответов
@@ -93,6 +94,9 @@ const QandA = () => {
               >
                 <h2 className="text-lg font-semibold">{qa.questionText}</h2>
                 <p className="mt-2 text-gray-700">{qa.answerText}</p>
+                <p className="text-gray-500 text-sm">
+                  {format(new Date(qa.questionDateTime), "dd.MM.yyyy HH:mm")}
+                </p>
               </div>
             ))}
           </div>
