@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 
 const Discussions = () => {
   const [discussions, setDiscussions] = useState([]);
@@ -60,8 +61,8 @@ const Discussions = () => {
             ))}
           </div>
           <ReactPaginate
-            previousLabel={"← Назад"}
-            nextLabel={"Вперед →"}
+            previousLabel={<AiOutlineArrowLeft />}
+            nextLabel={<AiOutlineArrowRight />}
             breakLabel={"..."}
             pageCount={pageCount}
             onPageChange={handlePageChange}

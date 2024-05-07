@@ -1,13 +1,13 @@
 import { useState } from "react";
+import { AiOutlineCheckCircle, AiOutlineCloseCircle } from "react-icons/ai";
 
 const Feedback = () => {
-  // Состояние для текста обратной связи
   const [feedback, setFeedback] = useState("");
+  const [feedbackSent, setFeedbackSent] = useState(false);
 
-  // Обработчик отправки обратной связи
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Отправка обратной связи на сервер
+
     fetch("http://localhost:4000/api/Feedback", {
       method: "POST",
       headers: {
@@ -17,7 +17,7 @@ const Feedback = () => {
     })
       .then((response) => {
         if (response.ok) {
-          alert("Обратная связь успешно отправлена");
+          setFeedbackSent(true);
           setFeedback("");
         } else {
           throw new Error("Failed to send feedback");
@@ -36,8 +36,13 @@ const Feedback = () => {
           <h1 className="text-2xl font-semibold text-gray-900">
             Обратная связь
           </h1>
-          {/* Форма для отправки обратной связи */}
           <div className="mt-6">
+            {feedbackSent ? (
+              <div className="flex items-center bg-green-100 text-green-800 rounded p-4 mb-4">
+                <AiOutlineCheckCircle className="text-green-500 mr-2" />
+                <p>Обратная связь успешно отправлена</p>
+              </div>
+            ) : null}
             <form
               onSubmit={handleSubmit}
               className="bg-white shadow sm:rounded-lg p-4"

@@ -4,9 +4,7 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Удалить токен из локального хранилища или куки
     localStorage.removeItem("token");
-    // Перенаправить пользователя на страницу логина
     navigate("/login");
   };
 
@@ -20,21 +18,33 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="flex space-x-4 items-baseline">
-            <Link to="/Discussion" className="text-white hover:text-gray-300">
+            <Link
+              to="/Discussion"
+              className="text-white hover:text-gray-300 transition-transform duration-300 transform hover:scale-105"
+            >
               Обсуждение
             </Link>
-            <Link to="/Feedback" className="text-white hover:text-gray-300">
+            <Link
+              to="/Feedback"
+              className="text-white hover:text-gray-300 transition-transform duration-300 transform hover:scale-105"
+            >
               Обратная связь
             </Link>
-            <Link to="/questions" className="text-white hover:text-gray-300">
+            <Link
+              to="/questions"
+              className="text-white hover:text-gray-300 transition-transform duration-300 transform hover:scale-105"
+            >
               Вопрос ответ
             </Link>
-            <Link to="/Suggestions" className="text-white hover:text-gray-300">
+            <Link
+              to="/Suggestions"
+              className="text-white hover:text-gray-300 transition-transform duration-300 transform hover:scale-105"
+            >
               Предложения
             </Link>
             <button
               onClick={handleLogout}
-              className="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+              className="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors duration-300"
             >
               Выход
             </button>

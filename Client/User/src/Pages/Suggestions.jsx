@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
+import { AiFillCheckCircle } from "react-icons/ai";
 
 const Suggestions = () => {
   const [suggestions, setSuggestions] = useState([]);
@@ -37,7 +38,6 @@ const Suggestions = () => {
           title: newSuggestion,
           status: "under consideration",
         };
-        // Добавляем новое предложение в начало массива
         setSuggestions([newSuggestionObj, ...suggestions]);
         setNewSuggestion("");
       } catch (error) {
@@ -82,7 +82,14 @@ const Suggestions = () => {
                   className="border-b border-gray-200 p-4 flex justify-between items-center"
                 >
                   <div>{suggestion.title}</div>
-                  <div className="text-gray-500">{suggestion.status}</div>
+                  <div className="text-gray-500 flex items-center">
+                    {suggestion.status === "under consideration" && (
+                      <>
+                        <span className="mr-1">Рассматривается</span>
+                        <AiFillCheckCircle className="text-green-500" />
+                      </>
+                    )}
+                  </div>
                 </li>
               ))}
             </ul>
@@ -116,24 +123,7 @@ const Suggestions = () => {
               activeLinkClassName={
                 "bg-white border border-gray-300 px-4 py-2 mx-1 rounded"
               }
-            >
-              <div className="flex">
-                <div className="bg-white border border-gray-300 px-4 py-2 mx-1 rounded-l">
-                  ← Назад
-                </div>
-                {[...Array(pageCount)].map((_, index) => (
-                  <div
-                    key={index}
-                    className="bg-white border border-gray-300 px-4 py-2 mx-1 rounded"
-                  >
-                    {index + 1}
-                  </div>
-                ))}
-                <div className="bg-white border border-gray-300 px-4 py-2 mx-1 rounded-r">
-                  Вперед →
-                </div>
-              </div>
-            </ReactPaginate>
+            />
           </div>
         </div>
       </div>

@@ -1,22 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-
-const BackArrow = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className="h-6 w-6 inline-block align-middle mr-2"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M10 19l-7-7m0 0l7-7m-7 7h18"
-    />
-  </svg>
-);
+import { AiOutlineArrowLeft } from "react-icons/ai";
 
 const Discussion = () => {
   const { id } = useParams();
@@ -92,7 +76,7 @@ const Discussion = () => {
             to="/Discussions"
             className="text-blue-500 hover:underline flex items-center mb-4"
           >
-            <BackArrow /> Назад
+            <AiOutlineArrowLeft className="inline-block mr-2" /> Назад
           </Link>
           {discussion ? (
             <div className="bg-white shadow sm:rounded-lg p-4 mt-4">
@@ -127,7 +111,7 @@ const Discussion = () => {
               onChange={(e) => setNewCommentText(e.target.value)}
             />
             <button
-              className="mt-2 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="mt-2 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-300"
               onClick={handleAddComment}
             >
               Добавить комментарий
