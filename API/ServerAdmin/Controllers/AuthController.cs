@@ -37,7 +37,6 @@ namespace CFN_ServerAdmin.Controllers
                 return BadRequest("Invalid model");
             }
 
-            // Ваша логика проверки учетных данных
             var isValid = await _authService.ValidateCredentials(model.Username, model.Password);
 
             if (!isValid)

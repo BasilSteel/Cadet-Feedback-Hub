@@ -4,27 +4,33 @@ import ReactPaginate from "react-paginate";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 
 const Discussions = () => {
+  // Состояния для хранения данных о дискуссиях, комментариях и текущей странице
   const [discussions, setDiscussions] = useState([]);
   const [comments, setComments] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const perPage = 5; // Количество элементов на странице
 
+  // Загрузка данных при монтировании компонента
   useEffect(() => {
+    // Загрузка списка дискуссий
     fetch("http://localhost:4000/api/Discussion")
       .then((response) => response.json())
-      .then((data) => setDiscussions(data.reverse())) // Отображаем обсуждения в обратном порядке
+      .then((data) => setDiscussions(data.reverse())) // Разворачиваем массив, чтобы новые дискуссии были сверху
       .catch((error) => console.error("Error fetching discussions:", error));
 
+    // Загрузка списка комментариев
     fetch("http://localhost:4000/api/Comment")
       .then((response) => response.json())
       .then((data) => setComments(data))
       .catch((error) => console.error("Error fetching comments:", error));
   }, []);
 
+  // Обработчик изменения страницы
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected);
   };
 
+  // Вычисляем смещение и общее количество страниц
   const offset = currentPage * perPage;
   const pageCount = Math.ceil(discussions.length / perPage);
 
@@ -40,17 +46,17 @@ const Discussions = () => {
                 className="bg-white shadow sm:rounded-lg p-4 mt-4"
               >
                 <h2 className="text-lg font-semibold">
+                  {/* Ссылка на страницу дискуссии */}
                   <Link to={`/discussion/${discussion.id}`}>
                     {discussion.title}
                   </Link>
                 </h2>
 
                 <hr />
-                {/* Последние три комментария */}
                 <ul className="mt-2">
                   {comments
                     .filter((comment) => comment.discussionId === discussion.id)
-                    .slice(-3)
+                    .slice(-3) // Показываем только последние 3 комментария
                     .map((comment) => (
                       <li key={comment.id} className="text-gray-700">
                         {comment.text}
@@ -60,6 +66,7 @@ const Discussions = () => {
               </div>
             ))}
           </div>
+          {/* Пагинация */}
           <ReactPaginate
             previousLabel={<AiOutlineArrowLeft />}
             nextLabel={<AiOutlineArrowRight />}
