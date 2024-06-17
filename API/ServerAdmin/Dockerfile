@@ -1,19 +1,17 @@
+# Use the official ASP.NET Core runtime as a parent image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
-EXPOSE 4001
+EXPOSE 80
 
+# Use the SDK image to build the app
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY ["CFN-Server.csproj", "."]
-RUN dotnet restore "./CFN-Server.csproj"
 COPY . .
-WORKDIR "/src/."
-RUN dotnet build "CFN-Server.csproj" -c Release -o /app/build
+RUN dotnet restore "CFN-Server.csproj"
+RUN dotnet publish "CFN-Server.csproj" -c Release -o /app/publish
 
-FROM build AS publish
-RUN dotnet publish "CFN-Server.csproj" -c Release -o /app/publish /p:UseAppHost=false
-
+# Copy the build result to the base image
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
+COPY --from=build /app/publish .
 ENTRYPOINT ["dotnet", "CFN-Server.dll"]
